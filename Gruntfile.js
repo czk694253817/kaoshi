@@ -30,9 +30,19 @@ module.exports = function (grunt) {
 
     // Project settings
     yeoman: appConfig,
-
+    less: {
+        compile: {
+            files: {
+                'app/styles/main.css': 'app/styles/style.less'
+            }
+        }
+    },
     // Watches files for changes and runs tasks based on the changed files
     watch: {
+      scripts: {
+            files: ['styles/style.less'],
+            tasks: ['less']
+        },
       bower: {
         files: ['bower.json'],
         tasks: ['wiredep']
@@ -438,7 +448,9 @@ module.exports = function (grunt) {
       'concurrent:server',
       'postcss:server',
       'connect:livereload',
+      'less',
       'watch'
+
     ]);
   });
 
@@ -466,7 +478,6 @@ module.exports = function (grunt) {
     'concat',
     'ngAnnotate',
     'copy:dist',
-    'cdnify',
     'cssmin',
     'uglify',
     'filerev',
